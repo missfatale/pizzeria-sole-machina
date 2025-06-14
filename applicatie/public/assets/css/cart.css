@@ -1,0 +1,56 @@
+/*--------------------------------------------------------------
+# Cart CSS 
+--------------------------------------------------------------*/
+
+/* -------------------- Cart -------------------- */
+
+.flex-container-cart {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+}
+
+#section-cart-order {
+    padding-bottom: 2rem;
+}
+
+#section-cart-checkout {
+    background-color: var(--clr-primary-white);
+    align-self: flex-end;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.cart-item {
+    display: flex;
+    padding: 2rem 2rem 0 2rem;
+}
+
+.cart-item-image,
+.cart-item-information {
+    padding: 2rem;
+}
+
+.cart-item-information h3,
+.cart-item-information p {
+    padding-bottom: 1rem;
+}
+
+.cart-item-information {
+    flex: 1;
+}
+
+.cart-totaal {
+    padding-bottom: 1rem;
+}
+
+.btn-checkout {
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    #section-cart-checkout {
+        width: 100%;
+        align-self: center;
+    }
+}

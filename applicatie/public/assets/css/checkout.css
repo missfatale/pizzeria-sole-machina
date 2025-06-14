@@ -1,0 +1,34 @@
+/*--------------------------------------------------------------
+# Checkout CSS 
+--------------------------------------------------------------*/
+
+/* -------------------- Checkout -------------------- */
+.flex-container-cart {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+}
+
+.cart-item-checkout {
+    padding: 2rem;
+}
+
+.cart-item-checkout {
+    flex: 1;
+}
+
+.btn-checkout {
+    margin-bottom: 2rem;
+}
+
+.register-form {
+    width: auto;
+    margin: 2rem 0 2rem 0;
+}
+
+@media (max-width: 768px) {
+    .register-form {
+        width: 100%;
+        margin: 2rem 2rem 0 2rem;
+    }
+}

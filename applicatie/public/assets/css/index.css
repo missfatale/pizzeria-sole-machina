@@ -1,0 +1,17 @@
+/*--------------------------------------------------------------
+# Index CSS 
+--------------------------------------------------------------*/
+
+/* -------------------- Index -------------------- */
+
+.grid-container-homepage {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-item-homepage img {
+    border-radius: 5px;
+}
+
+.grid-item-homepage {
+    background-color: var(--clr-secondary-white);
+}

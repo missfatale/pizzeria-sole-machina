@@ -1,0 +1,38 @@
+/*--------------------------------------------------------------
+# Orders Admin (ONLY) CSS 
+--------------------------------------------------------------*/
+
+/* -------------------- Orders Admin -------------------- */
+input,
+select {
+    background-color: var(--clr-primary-white);
+    padding: 10px;
+    border: 1px solid var(--clr-primary-hr);
+    border-radius: 5px;
+    width: 100%;
+    font-size: 1rem;
+    margin-bottom: 2rem;
+}
+
+.cart-header {
+    background-color: var(--clr-primary-white);
+    align-items: center;
+    margin: 0;
+}
+.order-status select {
+    margin-top: 2rem;
+}
+
+.order-historie h2 {
+    background-color: var(--clr-secondary-white);
+}
+
+@media (max-width: 768px) {
+    .cart-header {
+        margin: 0 2rem;
+    }
+
+    .order-details {
+        margin: 0 2rem;
+    }
+}

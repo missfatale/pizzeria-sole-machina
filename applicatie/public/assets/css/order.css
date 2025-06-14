@@ -1,0 +1,35 @@
+/*--------------------------------------------------------------
+# Checkout CSS 
+--------------------------------------------------------------*/
+
+/* -------------------- Order -------------------- */
+.cart-item {
+    display: flex;
+    padding: 0;
+}
+
+.cart-item-image,
+.cart-item-information {
+    padding: 1rem 2rem 1rem 2rem;
+}
+
+.order-historie,
+.order-recent {
+    margin-bottom: 2rem;
+}
+
+.order-status h1 {
+    background-color: var(--clr-primary-white);
+    padding-bottom: 2rem;
+}
+
+.order-historie h2 {
+    background-color: var(--clr-secondary-white);
+}
+
+@media (max-width: 768px) {
+    .cart-item {
+        display: flex;
+        padding: 0 2rem 0 2rem;
+    }
+}

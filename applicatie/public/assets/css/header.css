@@ -1,0 +1,63 @@
+/*--------------------------------------------------------------
+# Header CSS 
+--------------------------------------------------------------*/
+
+/* -------------------- Header -------------------- */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 75px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: var(--clr-primary-green);
+    border-top: 5px solid var(--clr-primary-red);
+}
+
+/* ---------- Title/Logo ---------- */
+.header-title h2 a:hover {
+    color: var(--clr-primary-red);
+}
+
+/* ---------- Navbar ---------- */
+.header-navbar-list {
+    display: flex;
+    gap: 2rem;
+}
+
+.header-navbar-list li {
+    background-color: var(--clr-primary-green);
+    list-style-type: none;
+}
+
+.header-navbar-list a {
+    background-color: var(--clr-primary-green);
+    color: var(--clr-primary-white);
+}
+
+/* ---------- Login / Cart ---------- */
+.header-flex-container {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.header-btns button {
+    background-color: var(--clr-primary-red);
+    color: var(--clr-primary-white);
+}
+
+.header-btns {
+    background-color: var(--clr-primary-green);
+    display: flex;
+    gap: 2rem;
+}
+
+@media (max-width: 768px) {
+    header {
+        justify-content: flex-end;
+        padding-right: 2rem;
+    }
+}

@@ -1,0 +1,33 @@
+/*--------------------------------------------------------------
+# Privacyverklaring CSS 
+--------------------------------------------------------------*/
+
+/* -------------------- Privacyverklaring -------------------- */
+#main-privacyverklaring {
+    padding: 2rem 0;
+    background-color: var(--clr-secondary-white);
+}
+
+.privacyverklaring-container {
+    width: 1440px;
+    flex-direction: column;
+}
+
+.privacyverklaring-container h1,
+.privacyverklaring-container h2,
+.privacyverklaring-container h3 {
+    padding: 1rem;
+}
+
+.privacyverklaring-container ol {
+    padding: 0 2rem 2rem 2rem;
+    list-style-type: upper-roman;
+}
+
+.privacyverklaring-container ol {
+    padding: 0 2rem 2rem 2rem;
+}
+
+.privacyverklaring-container p {
+    padding: 0 1rem 1rem 1rem;
+}

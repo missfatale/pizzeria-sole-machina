@@ -1,0 +1,9 @@
+.DS_Store
+/.vscode/
+/.devcontainer/
+/readme-images/
+/webserver-setup/
+Dockerfile-webserver
+docker-compose.yml
+readme.md
+variables.env
