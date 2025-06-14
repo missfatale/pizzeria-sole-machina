@@ -20,7 +20,7 @@
 
     <div class="header-title hidden">
         <h2 class="bg-primary-colour-scheme">
-            <a href="<?php echo BASE_URL; ?>/public/index.php" class="bg-primary-colour-scheme">Pizzeria Sole Machina</a>
+            <a href="<?php echo BASE_URL; ?>index.php" class="bg-primary-colour-scheme"><?= htmlspecialchars(WEBSITE_TITLE)?></a>
         </h2>
     </div>
 
@@ -35,7 +35,7 @@
 
     <div class="header-flex-container bg-primary-colour-scheme">
         <div class="header-buttons bg-primary-colour-scheme">
-            <button class="btn-secondary" onclick="location.href='<?php echo BASE_URL; ?>/public/frontend/login.php'">Inloggen</button>
+            <button class="btn-secondary" onclick="location.href='<?php echo BASE_URL; ?>login.php'">Inloggen</button>
         </div>
 
         <div class="header-cart bg-primary-colour-scheme">
