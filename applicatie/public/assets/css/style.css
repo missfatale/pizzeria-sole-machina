@@ -257,6 +257,12 @@ li a:hover {
 animation: pulse 1.5s infinite;
 }
 
+
+/* -------------------- Forms -------------------- */
+form div {
+    background-color: var(--clr-primary-white);
+}
+
 /*--------------------------------------------------------------
 # Responsive Design (Phones/Tablets)
 --------------------------------------------------------------*/
