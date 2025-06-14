@@ -22,10 +22,10 @@ function renderDefaultHeadSection(): void {
     <?php
 }
 
-function viewLoginForm() {
+function viewLoginForm(): void {
     include __DIR__ . '/../../templates/forms/login-form.php';
 }
 
-function viewRegisterForm() {
+function viewRegisterForm(): void {
     include __DIR__ . '/../../templates/forms/register-form.php';
 }
