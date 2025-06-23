@@ -13,12 +13,12 @@ $user = currentUser();
             <span></span>
 
             <ul id="hamburger-menu-list">
-                <li><a href="<?php echo INDEX_PAGE; ?>">Home</a></li>
-                <li><a href="<?php echo BASE_URL; ?>/public/frontend/acties.php">Acties</a></li>
-                <li><a href="<?php echo BASE_URL; ?>/public/frontend/pizza.php">Pizza</a></li>
-                <li><a href="<?php echo BASE_URL; ?>/public/frontend/focaccia.php">Focaccia</a></li>
-                <li><a href="<?php echo BASE_URL; ?>/public/frontend/dranken.php">Dranken</a></li>
-                <li><a href="<?= BASE_URL; ?>/page.php?page=privacy">Privacyverklaring</a></li>
+                <li><a href="<?= INDEX_PAGE; ?>">Home</a></li>
+                <li><a href="<?= BASE_URL . '/category.php?category=acties'; ?>">Acties</a></li>
+                <li><a href="<?= BASE_URL . '/category.php?category=pizza'; ?>">Pizza</a></li>
+                <li><a href="<?= BASE_URL . '/category.php?category=focaccia'; ?>">Focaccia</a></li>
+                <li><a href="<?= BASE_URL . '/category.php?category=dranken'; ?>">Dranken</a></li>
+                <li><a href="<?= BASE_URL . '/page.php?page=privacy'; ?>">Privacyverklaring</a></li>
             </ul>
         </div>
     </nav>
@@ -31,10 +31,10 @@ $user = currentUser();
 
     <nav class="header-navbar hidden">
         <ul class="header-navbar-list bg-primary-colour-scheme">
-            <li><a href="<?php echo BASE_URL; ?>/public/frontend/acties.php">Acties</a></li>
-            <li><a href="<?php echo BASE_URL; ?>/public/frontend/pizza.php">Pizza</a></li>
-            <li><a href="<?php echo BASE_URL; ?>/public/frontend/focaccia.php">Focaccia</a></li>
-            <li><a href="<?php echo BASE_URL; ?>/public/frontend/dranken.php">Dranken</a></li>
+            <li><a href="<?= BASE_URL . '/category.php?category=acties'?>">Acties</a></li>
+            <li><a href="<?= BASE_URL . '/category.php?category=pizza'?>">Pizza</a></li>
+            <li><a href="<?= BASE_URL . '/category.php?category=focaccia'?>">Focaccia</a></li>
+            <li><a href="<?= BASE_URL . '/category.php?category=dranken'?>">Dranken</a></li>
         </ul>
     </nav>
 
