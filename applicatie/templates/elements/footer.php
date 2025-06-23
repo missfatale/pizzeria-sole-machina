@@ -5,6 +5,6 @@
     </div>
 
     <div class="footer-copyright">
-        <p class="text-primary-colour bg-primary-colour-scheme">© 2024 <a href="<?php echo BASE_URL; ?>index.php" class="bg-primary-colour-scheme"><?= htmlspecialchars(WEBSITE_TITLE)?></a>. Alle rechten voorbehouden.</p>
+        <p class="text-primary-colour bg-primary-colour-scheme">© <?= COPYRIGHT_YEAR ?> - <a href="<?= INDEX_PAGE ?>" class="bg-primary-colour-scheme"><?= htmlspecialchars(WEBSITE_TITLE)?></a>. Alle rechten voorbehouden.</p>
     </div>
 </footer>

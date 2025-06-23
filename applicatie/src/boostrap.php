@@ -28,6 +28,7 @@ $config = require_once 'config.php';
 define('WEBSITE_TITLE', $config['websiteTitle']);
 define('CHARSET', $config['websiteCharset']);
 define('WEBSITE_LANGUAGE', $config['websiteLanguage']);
+define('COPYRIGHT_YEAR', $config['websiteCopyrightYear']);
 
 // Common Page Paths (Clean, Reusable Constants for Redirects and Navigation)
 const LOGIN_PAGE = BASE_URL . '/login.php';
