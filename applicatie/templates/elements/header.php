@@ -1,3 +1,8 @@
+<?php
+// Gets Current User
+$user = currentUser();
+?>
+
 <header id="header">
     <nav id="hamburger-navigation">
         <div id="hamburger-menu-toggle">
