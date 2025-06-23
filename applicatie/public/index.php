@@ -15,7 +15,7 @@ $user = currentUser();
 
 <head>
     <?php renderDefaultHeadSection() ?>
-    <link rel="stylesheet" href="<?= BASE_URL; ?>/assets/css/index.css">
+    <link rel="stylesheet" href="<?= BASE_URL . '/assets/css/index.css'; ?>">
 </head>
 
 <body>
@@ -32,18 +32,17 @@ $user = currentUser();
         <div class="grid-container grid-container-homepage">
 
             <div class="grid-item grid-item-homepage">
-                <a href="pages/frontend/acties.html"><img src="<?= BASE_URL; ?>/assets/images/homepage/onze-acties.png" alt="Actie pizzas"></a>
+                <a href="<?= BASE_URL . '/category.php?category=acties'?>"><img src="<?= BASE_URL . '/assets/images/homepage/onze-acties.png'?>" alt="Actie pizzas"></a>
             </div>
 
             <div class="grid-item grid-item-homepage">
-                <a href="pages/frontend/pizza.html"><img src="<?= BASE_URL; ?>/assets/images/homepage/onze-pizzas.png" alt="Ons pizza aanbod"></a>
+                <a href="<?= BASE_URL . '/category.php?category=pizza'?>"><img src="<?= BASE_URL . '/assets/images/homepage/onze-pizzas.png'?>" alt="Ons pizza aanbod"></a>
             </div>
 
             <div class="grid-item grid-item-homepage">
-                <a href="pages/focaccia.html"><img src="<?= BASE_URL; ?>/assets/images/homepage/onze-focaccia.png" alt="Ons focaccia aanbod"></a>
+                <a href="<?= BASE_URL . '/category.php?category=focaccia'?>"><img src="<?= BASE_URL . '/assets/images/homepage/onze-focaccia.png' ?>" alt="Ons focaccia aanbod"></a>
             </div>
         </div>
-
     </main>
 
     <!-- Footer -->
