@@ -1,26 +1,18 @@
 <?php
-require_once __DIR__ . '/../../vendor/autoload.php';
 
-use Symfony\Component\Dotenv\Dotenv;
+$db_host = 'database_server';
+$db_name = 'pizzeria';
 
-$dotenv = new Dotenv();
-$dotenv->loadEnv(__DIR__ . '/.env');
+$db_user    = 'sa';
+$db_password = 'abc123!@#';
 
-$serverName = $_ENV['DB_HOST'];
-$database   = $_ENV['DB_NAME'];
-$username   = $_ENV['DB_USER'];
-$password   = $_ENV['DB_PASS'];
+$verbinding = new PDO('sqlsrv:Server=' . $db_host . ';Database=' . $db_name . ';ConnectionPooling=0;TrustServerCertificate=1', $db_user, $db_password);
+unset($db_password);
+$verbinding->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-try {
-    $dsn = "sqlsrv:Server=$serverName;Database=$database";
-    $conn = new PDO($dsn, $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    //echo "Database verbinding geslaagd!";
-} catch (PDOException $e) {
-    //echo "Database verbinding mislukt: " . $e->getMessage();
+function maakVerbinding() {
+    global $verbinding;
+    return $verbinding;
 }
 
-function connect() {
-    global $conn;
-    return $conn;
-}
+?>
