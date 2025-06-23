@@ -35,7 +35,7 @@ $user = currentUser();
     <section class="flex-container flex-container-cart">
         <div class="account-box">
             <h2>Accountgegevens</h2>
-            <p>Je bent ingelogd als: <strong class="bg-white"><?= htmlspecialchars($user['username']) ?></strong>.</p>
+            <p>Je bent ingelogd als: <strong class="bg-white"><?= htmlspecialchars($user['username']) ?></strong></p>
             <p>Rol: <strong class="bg-white"><?= htmlspecialchars($user['role']) ?></strong></p>
 
             <form action="<?= BASE_URL . '/actions/logout-action.php' ?>" method="POST" class="bg-white">
