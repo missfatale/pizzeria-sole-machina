@@ -19,16 +19,15 @@ require_once BASE_DIR . '/src/view/view-functions.php';
 // Load Authentication Functions (like isLoggedIn, authenticateUser, logout, etc.)
 require_once BASE_DIR . '/src/auth.php';
 
+// Load Authentication Helper Functions (like currentUser, userIsLoggedIn, etc.)
+require_once BASE_DIR . '/src/helpers/auth-helper.php';
+
 // Load Configuration (Title, Charset, Language, etc.)
 $config = require_once 'config.php';
 
 define('WEBSITE_TITLE', $config['websiteTitle']);
 define('CHARSET', $config['websiteCharset']);
 define('WEBSITE_LANGUAGE', $config['websiteLanguage']);
-
-// Auth Status Globals (Used Throughout Views)
-$isLoggedIn = isLoggedIn();
-$user = $isLoggedIn ? getLoggedInUser() : null;
 
 // Common Page Paths (Clean, Reusable Constants for Redirects and Navigation)
 const LOGIN_PAGE = BASE_URL . '/login.php';
