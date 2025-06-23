@@ -2,9 +2,10 @@
 
 define('BASE_DIR', realpath(__DIR__ . '/../../'));
 
-$scriptName = str_replace('\\', '/', $_SERVER['SCRIPT_NAME']);
-$scriptDir = dirname($scriptName);
+// Public URL Base (Used in HTML hrefs and srcs)
+const BASE_URL = '/public';
 
-$baseUrl = str_replace('/public', '', $scriptDir);
-
-define('BASE_URL', rtrim($baseUrl, '/'));
+// Internal Absolute Paths (Used in require/include)
+const PUBLIC_DIR = BASE_DIR . '/public';
+const SRC_DIR = BASE_DIR . '/src';
+const TEMPLATES_DIR = BASE_DIR . '/templates';
