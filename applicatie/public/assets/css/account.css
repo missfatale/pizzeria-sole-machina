@@ -1,0 +1,30 @@
+/*--------------------------------------------------------------
+# Account CSS
+--------------------------------------------------------------*/
+
+/* -------------------- Account -------------------- */
+
+.account-box {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    margin: 2rem auto;
+    text-align: center;
+}
+
+.account-box h2 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.account-box p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+}
+
+.logout-button {
+    margin: 0.5rem;
+}
