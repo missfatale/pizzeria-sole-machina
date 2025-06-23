@@ -1,29 +1,39 @@
 <?php
 
-// Adds Path Handling Functionality
-require_once __DIR__ . '/../path-handler.php';
+// Bootstrap: Loads all Core Configurations and Path Handlers for the Project.
+require_once __DIR__ . '/../../boostrap.php';
 
-$REGISTER_PAGE = BASE_URL . '/../register.php';
-$INDEX_PAGE = BASE_URL . '/../index.php';
+require_once BASE_DIR . '/src/data/data-users.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $firstName = htmlspecialchars($_POST["register-first_name"]);
-    $lastName = htmlspecialchars($_POST["register-last_name"]);
-    $geboortedatum = htmlspecialchars($_POST["register-geboortedatum"]);
-    $username = htmlspecialchars($_POST["register-username"]);
-    $password = htmlspecialchars($_POST["register-password"]);
-    $email = htmlspecialchars($_POST["register-email"]);
-    $mobile = htmlspecialchars($_POST["register-mobile"]);
-    $postcode = htmlspecialchars($_POST["register-postcode"]);
-    $address = htmlspecialchars($_POST["register-address"]);
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $first_name = $_POST["register-first_name"] ?? '';
+    $last_name  = $_POST["register-last_name"] ?? '';
+    $username   = $_POST["register-username"] ?? '';
+    $password   = $_POST["register-password"] ?? '';
+    $address    = trim($_POST["register-address"] ?? '');
 
-    if (empty($firstName) || empty($lastName) || empty($geboortedatum) || empty($username) || empty($password) || empty($email) || empty($mobile) || empty($postcode) || empty($address)) {
-        header("Location: $REGISTER_PAGE");
+    // Check verplichte velden
+    if (empty($first_name) || empty($last_name) || empty($username) || empty($password) || empty($address)) {
+        $_SESSION["register_error"] = "Alle velden zijn verplicht.";
+        header('Location: ' . LOGIN_PAGE);
         exit();
     }
-}
 
-else {
-    header("Location: $REGISTER_PAGE");
+    // Probeer gebruiker aan te maken
+    $user = registerUser($first_name, $last_name, $username, $password, $address);
+
+    if (!$user) {
+        $_SESSION["register_error"] = "Registratie mislukt. Gebruikersnaam bestaat mogelijk al.";
+        header('Location: ' . LOGIN_PAGE);
+        exit();
+    }
+
+    // Inloggen na succesvolle registratie
+    authenticateUser($user["username"], $user["role"], $user["first_name"]);
+    $_SESSION["is_logged_in"] = true;
+    header('Location: ' . INDEX_PAGE);
     exit();
 }
+
+header('Location: ' . LOGIN_PAGE);
+exit();
