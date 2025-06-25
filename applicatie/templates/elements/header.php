@@ -1,8 +1,3 @@
-<?php
-// Gets Current User
-$user = currentUser();
-?>
-
 <header id="header">
     <nav id="hamburger-navigation">
         <div id="hamburger-menu-toggle">
@@ -14,10 +9,10 @@ $user = currentUser();
 
             <ul id="hamburger-menu-list">
                 <li><a href="<?= INDEX_PAGE; ?>">Home</a></li>
-                <li><a href="<?= BASE_URL . '/category.php?category=acties'; ?>">Acties</a></li>
+                <li><a href="<?= BASE_URL . '/category.php?category=voorgerecht'; ?>">Voorgerecht</a></li>
+                <li><a href="<?= BASE_URL . '/category.php?category=maaltijd'; ?>">Maaltijd</a></li>
                 <li><a href="<?= BASE_URL . '/category.php?category=pizza'; ?>">Pizza</a></li>
-                <li><a href="<?= BASE_URL . '/category.php?category=focaccia'; ?>">Focaccia</a></li>
-                <li><a href="<?= BASE_URL . '/category.php?category=dranken'; ?>">Dranken</a></li>
+                <li><a href="<?= BASE_URL . '/category.php?category=drank'; ?>">Drank</a></li>
                 <li><a href="<?= BASE_URL . '/page.php?page=privacy'; ?>">Privacyverklaring</a></li>
             </ul>
         </div>
@@ -31,10 +26,10 @@ $user = currentUser();
 
     <nav class="header-navbar hidden">
         <ul class="header-navbar-list bg-primary-colour-scheme">
-            <li><a href="<?= BASE_URL . '/category.php?category=acties'?>">Acties</a></li>
-            <li><a href="<?= BASE_URL . '/category.php?category=pizza'?>">Pizza</a></li>
-            <li><a href="<?= BASE_URL . '/category.php?category=focaccia'?>">Focaccia</a></li>
-            <li><a href="<?= BASE_URL . '/category.php?category=dranken'?>">Dranken</a></li>
+            <li><a href="<?= BASE_URL . '/category.php?category=voorgerecht'; ?>">Voorgerecht</a></li>
+            <li><a href="<?= BASE_URL . '/category.php?category=maaltijd'; ?>">Maaltijd</a></li>
+            <li><a href="<?= BASE_URL . '/category.php?category=pizza'; ?>">Pizza</a></li>
+            <li><a href="<?= BASE_URL . '/category.php?category=drank'; ?>">Drank</a></li>
         </ul>
     </nav>
 
@@ -50,8 +45,8 @@ $user = currentUser();
         </div>
 
         <div class="header-cart bg-primary-colour-scheme">
-            <a href="<?= userIsLoggedIn() ? CART_PAGE : LOGIN_PAGE; ?>" class="bg-primary-colour-scheme">
-            <i class="fa-solid fa-cart-shopping bg-primary-colour-scheme"></i>
+            <a href="<?= CART_PAGE ?>" class="bg-primary-colour-scheme">
+                <i class="fa-solid fa-cart-shopping bg-primary-colour-scheme"></i>
             </a>
         </div>
     </div>
