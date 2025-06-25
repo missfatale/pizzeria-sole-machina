@@ -1,11 +1,52 @@
 <?php
 
+/**
+ * view-functions.php
+ *
+ * Provides view-related helper functions for rendering page titles, head section,
+ * and including login/register form templates.
+ *
+ * Functions:
+ * - getPageTitle(): Determines the page title dynamically based on globals or query params.
+ * - renderDefaultHeadSection(): Outputs the standard HTML <head> content with metatags and stylesheets.
+ * - viewLoginForm(): Includes the login form template.
+ * - viewRegisterForm(): Includes the register form template.
+ */
+
 function getPageTitle(): string {
     $websiteTitle = WEBSITE_TITLE;
-    $websitePage = $GLOBALS['pageTitle'] ?? null;
 
-    return $websitePage ? "$websitePage | $websiteTitle" : $websiteTitle;
+    // Check lokale variabele eerst (via variabele variabele trick)
+    if (!empty($GLOBALS['pageTitle'])) {
+        $pageNameFormatted = ucwords(str_replace(['-', '_'], ' ', strtolower($GLOBALS['pageTitle'])));
+        return "$pageNameFormatted | $websiteTitle";
+    }
+
+    // Alternatief: check variabele in de scope waar functie wordt aangeroepen
+    if (isset($GLOBALS['pageTitleLocal'])) {
+        $pageNameFormatted = ucwords(str_replace(['-', '_'], ' ', strtolower($GLOBALS['pageTitleLocal'])));
+        return "$pageNameFormatted | $websiteTitle";
+    }
+
+    if (!empty($_GET['category'])) {
+        $category = $_GET['category'];
+        $pageNameFormatted = ucwords(str_replace(['-', '_'], ' ', strtolower($category)));
+        return "$pageNameFormatted | $websiteTitle";
+    }
+
+    if (!empty($_GET['page'])) {
+        $page = $_GET['page'];
+        $pageNameFormatted = ucwords(str_replace(['-', '_'], ' ', strtolower($page)));
+        return "$pageNameFormatted | $websiteTitle";
+    }
+
+    $currentPage = basename($_SERVER['SCRIPT_NAME']);
+    $pageName = pathinfo($currentPage, PATHINFO_FILENAME);
+    $pageNameFormatted = ucwords(str_replace(['-', '_'], ' ', strtolower($pageName)));
+
+    return $pageNameFormatted ? "$pageNameFormatted | $websiteTitle" : $websiteTitle;
 }
+
 
 function renderDefaultHeadSection(): void {
     ?>
