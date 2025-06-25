@@ -50,7 +50,7 @@ if (!userIsLoggedIn()) {
             </div>
         </section>
 
-        <!-- Alleen beschikbaar voor Gebruikers met de Rol Personnel -->
+        <!-- Only visible to users with the personnel role -->
         <?php if (isset($user['role']) && $user['role'] === 'Personnel'): ?>
             <section class="flex-container flex-container-cart">
                 <div class="account-box">
