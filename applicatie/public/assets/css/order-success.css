@@ -1,0 +1,38 @@
+/*--------------------------------------------------------------
+# Order Success CSS
+--------------------------------------------------------------*/
+
+#main-order-success {
+    max-width: 600px;
+    margin: 4rem auto;
+    padding: 2rem 3rem;
+    background-color: var(--clr-primary-white);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#main-order-success h1 {
+    font-size: 2.5rem;
+    color: var(--clr-primary-green);
+    background-color: var(--clr-primary-white);
+    margin-bottom: 1rem;
+}
+
+#main-order-success p {
+    font-size: 1.25rem;
+    color: var(--clr-primary-black);
+    margin: 1rem 0;
+}
+
+#main-order-success a {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.75rem 2rem;
+    background-color: var(--clr-primary-green);
+    color: var(--clr-secondary-white);
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+}
