@@ -198,6 +198,29 @@ li a:hover {
 
 /* -------------------- Grid -------------------- */
 
+.grid-item {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.grid-item > * {
+    margin-bottom: 0.5rem;
+}
+
+.card-content {
+    flex-grow: 1;
+}
+
+.btn-primary {
+    align-self: flex-end;
+}
+
+
 .grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
