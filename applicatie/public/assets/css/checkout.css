@@ -68,7 +68,17 @@
     margin-left: 2rem;
 }
 
+.register-form {
+    border-radius: 8px;
+    width: 350px;
+    margin: 0rem 0rem 0rem 0rem;
+}
+
 @media (max-width: 768px) {
+    .register-form {
+        width: 600px;
+    }
+
     .flex-container-cart {
         flex-direction: column;
     }
