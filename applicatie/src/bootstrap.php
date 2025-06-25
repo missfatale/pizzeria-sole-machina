@@ -22,6 +22,9 @@ require_once BASE_DIR . '/src/auth.php';
 // Load Authentication Helper Functions (like currentUser, userIsLoggedIn, etc.)
 require_once BASE_DIR . '/src/helpers/auth-helper.php';
 
+
+require_once BASE_DIR . '/src/helpers/image-helper.php';
+
 // Load Configuration (Title, Charset, Language, etc.)
 $config = require_once 'config.php';
 
