@@ -1,18 +1,13 @@
 <?php
-// Bootstrap: Loads all Core Configurations and Path Handlers for the Project.
-require_once __DIR__ . '/../src/boostrap.php';
 
-// Page Title
-$pageTitle = "Account";
+// Bootstrap: Loads all Core Configurations and Path Handlers for the Project.
+require_once __DIR__ . '/../src/bootstrap.php';
 
 // Redirect User IF Not Logged In
 if (!userIsLoggedIn()) {
     header('Location: ' . LOGIN_PAGE);
     exit();
 }
-
-// Gets Current User
-$user = currentUser();
 
 ?>
 
@@ -25,28 +20,41 @@ $user = currentUser();
 </head>
 
 <body>
-<?php require_once BASE_DIR . '/templates/elements/header.php'; ?>
 
-<main id="main-account">
-    <section class="flex-container pagina-titel">
-        <h1>Welkom, <?= htmlspecialchars($user['firstname']) ?></h1>
-    </section>
+<!-- Header + Navigation -->
+<?php require_once TEMPLATES_DIR . '/elements/header.php'; ?>
 
-    <section class="flex-container flex-container-cart">
-        <div class="account-box">
-            <h2>Accountgegevens</h2>
-            <p>Je bent ingelogd als: <strong class="bg-white"><?= htmlspecialchars($user['username']) ?></strong></p>
-            <p>Rol: <strong class="bg-white"><?= htmlspecialchars($user['role']) ?></strong></p>
+    <!-- Main Content -->
+    <main id="main-account">
+        <section class="flex-container pagina-titel">
+            <h1>Welkom, <?= htmlspecialchars($user['firstname']) ?></h1>
+        </section>
 
-            <form action="<?= BASE_URL . '/actions/logout-action.php' ?>" method="POST" class="bg-white">
-                <button type="submit" class="btn-secondary logout-button">Uitloggen</button>
-            </form>
-        </div>
-    </section>
+        <section class="flex-container flex-container-cart">
+            <div class="account-box">
+                <h2>Accountgegevens</h2>
+                <p>Je bent ingelogd als: <strong class="bg-white"><?= htmlspecialchars($user['username']) ?></strong></p>
+                <p>Rol: <strong class="bg-white"><?= htmlspecialchars($user['role']) ?></strong></p>
 
-</main>
+                <form action="<?= BASE_URL . '/actions/logout-action.php' ?>" method="POST" class="bg-white">
+                    <button type="submit" class="btn-secondary account-button">Uitloggen</button>
+                </form>
+            </div>
+        </section>
 
-<?php require_once BASE_DIR . '/templates/elements/footer.php'; ?>
+        <section class="flex-container flex-container-cart">
+            <div class="account-box">
+                <h2>Mijn Bestellingen</h2>
+                <p>Bekijk hier al je eerdere bestellingen en de status ervan.</p>
+                <button class="btn-secondary account-button" onclick="location.href='<?= ORDER_PAGE ?>'">Bekijk Bestellingen</button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <?php require_once TEMPLATES_DIR . '/elements/footer.php'; ?>
+
 </body>
 
 </html>
