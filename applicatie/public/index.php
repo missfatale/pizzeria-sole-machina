@@ -5,6 +5,7 @@ require_once __DIR__ . '/../src/bootstrap.php';
 
 // Overrides Page Title
 $pageTitle = "Home";
+
 ?>
 
 <!DOCTYPE html>
