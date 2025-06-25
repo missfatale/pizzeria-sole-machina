@@ -1,7 +1,7 @@
 <?php
 
 // Bootstrap: Loads all Core Configurations and Path Handlers for the Project.
-require_once __DIR__ . '/../src/boostrap.php';
+require_once __DIR__ . '/../src/bootstrap.php';
 
 // Sets Page Title
 $pageTitle = "Login";
@@ -13,7 +13,7 @@ $pageTitle = "Login";
 
 <head>
     <?php renderDefaultHeadSection() ?>
-    <link rel="stylesheet" href="<?= BASE_URL; ?>/assets/css/login.css">
+    <link rel="stylesheet" href="<?= BASE_URL . '/assets/css/login.css' ?>">
 </head>
 
 <body>
@@ -31,9 +31,9 @@ $pageTitle = "Login";
         <div class="flex-container flex-container-cart">
 
             <!-- Registreren -->
-            <section>
+            <section class="register-section">
                 <div class="flex-container">
-                    <form action="<?= BASE_URL; ?>/actions/register-action.php" method="POST" class="register-form">
+                    <form action="<?= BASE_URL . '/actions/register-action.php' ?>" method="POST" class="register-form">
                         <h2>Registreren</h2>
 
                         <?php if (isset($_SESSION['register_error'])): ?>
@@ -49,9 +49,9 @@ $pageTitle = "Login";
             </section>
 
             <!-- Inloggen -->
-            <section>
+            <section class="login-section">
                 <div class="flex-container">
-                    <form action="<?= BASE_URL; ?>/actions/login-action.php" method="POST">
+                    <form action="<?= BASE_URL . '/actions/login-action.php' ?>" method="POST" class="login-form">
                         <h2>Inloggen</h2>
                         <?php viewLoginForm(); ?>
                     </form>
