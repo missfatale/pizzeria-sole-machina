@@ -50,6 +50,17 @@ if (!userIsLoggedIn()) {
             </div>
         </section>
 
+        <!-- Alleen beschikbaar voor Gebruikers met de Rol Personnel -->
+        <?php if (isset($user['role']) && $user['role'] === 'Personnel'): ?>
+            <section class="flex-container flex-container-cart">
+                <div class="account-box">
+                    <h2>Admin Dashboard</h2>
+                    <p>Bekijk hier het admin overzicht.</p>
+                    <button class="btn-secondary account-button" onclick="location.href='<?= ADMIN_DASHBOARD_PAGE ?>'">Dashboard</button>
+                </div>
+            </section>
+        <?php endif; ?>
+
     </main>
 
     <!-- Footer -->
