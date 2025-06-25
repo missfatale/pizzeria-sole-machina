@@ -8,7 +8,7 @@
  */
 
 // Bootstrap: Loads all Core Configurations and Path Handlers for the Project.
-require_once __DIR__ . '/../boostrap.php';
+require_once __DIR__ . '/../bootstrap.php';
 
 logout(); // Destroy Session
 session_regenerate_id(true); // Prevents Session Fixation
