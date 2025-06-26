@@ -21,8 +21,8 @@ if (!userIsLoggedIn()) {
 
 <body>
 
-<!-- Header + Navigation -->
-<?php require_once TEMPLATES_DIR . '/elements/header.php'; ?>
+    <!-- Header + Navigation -->
+    <?php require_once TEMPLATES_DIR . '/elements/header.php'; ?>
 
     <!-- Main Content -->
     <main id="main-account">
@@ -51,7 +51,7 @@ if (!userIsLoggedIn()) {
         </section>
 
         <!-- Only visible to users with the personnel role -->
-        <?php if (isset($user['role']) && $user['role'] === 'Personnel'): ?>
+        <?php if (isAdmin()): ?>
             <section class="flex-container flex-container-cart">
                 <div class="account-box">
                     <h2>Admin Dashboard</h2>
