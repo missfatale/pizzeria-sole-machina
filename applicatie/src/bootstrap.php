@@ -19,11 +19,11 @@ require_once BASE_DIR . '/src/view/view-functions.php';
 // Load Authentication Functions (like isLoggedIn, authenticateUser, logout, etc.)
 require_once BASE_DIR . '/src/auth.php';
 
-// Load Authentication Helper Functions (like currentUser, userIsLoggedIn, etc.)
+// Load Helper Functions
 require_once BASE_DIR . '/src/helpers/auth-helper.php';
-
-
+require_once BASE_DIR . '/src/helpers/order-helper.php';
 require_once BASE_DIR . '/src/helpers/image-helper.php';
+require_once BASE_DIR . '/src/helpers/cart-helper.php';
 
 // Load Configuration (Title, Charset, Language, etc.)
 $config = require_once 'config.php';
@@ -38,5 +38,10 @@ const LOGIN_PAGE = BASE_URL . '/login.php';
 const INDEX_PAGE = BASE_URL . '/index.php';
 const ACCOUNT_PAGE = BASE_URL . '/account.php';
 const CART_PAGE = BASE_URL . '/cart.php';
+const ORDER_PAGE = BASE_URL . '/order.php';
 const LOGOUT_PAGE = BASE_URL . '/actions/logout-action.php';
 const ADMIN_DASHBOARD_PAGE = BASE_URL . '/admin/dashboard.php';
+const ORDER_CONFIRMATION_PAGE = BASE_URL . '/order-success.php';
+
+// Make the current user globally available as $user
+$user = currentUser();
