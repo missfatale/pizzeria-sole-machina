@@ -22,5 +22,5 @@ function userIsLoggedIn(): bool {
 
 function isAdmin(): bool {
     $user = currentUser();
-    return $user && isset($user['role']) && $user['role'] === 'Admin';
+    return $user && isset($user['role']) && $user['role'] === 'Personnel';
 }
