@@ -1,143 +1,96 @@
 <?php
-
 // Bootstrap: Loads all Core Configurations and Path Handlers for the Project.
-require_once __DIR__ . '/../src/boostrap.php';
+require_once __DIR__ . '/../src/bootstrap.php';
+require_once SRC_DIR . '/helpers/cart-helper.php';
+require_once SRC_DIR . '/helpers/image-helper.php';
 
+$cartItems = getCartItems();
+$totalPrice = getCartTotal();
 ?>
 
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="<?= htmlspecialchars(WEBSITE_LANGUAGE) ?>">
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pizzeria Sole Machina - Cart</title>
-  <link rel="stylesheet" href="../../assets/css/style.css">
-  <link rel="stylesheet" href="../../assets/css/header.css">
-  <link rel="stylesheet" href="../../assets/css/footer.css">
-  <link rel="stylesheet" href="../../assets/css/all.min.css">
-  <link rel="stylesheet" href="../../assets/css/fontawesome.min.css">
-  <link rel="stylesheet" href="../../assets/css/cart.css">
+    <?php renderDefaultHeadSection() ?>
+    <link rel="stylesheet" href="<?= BASE_URL . '/assets/css/cart.css'; ?>">
 </head>
 
 <body>
-  <!-- Header + Navigation -->
-  <header id="header">
-    <nav id="hamburger-navigation">
-      <div id="hamburger-menu-toggle">
-        <input type="checkbox" id="hamburger-menu-checkbox">
 
-        <span></span>
-        <span></span>
-        <span></span>
+    <!-- Header + Navigation -->
+    <?php require_once TEMPLATES_DIR . '/elements/header.php'; ?>
 
-        <ul id="hamburger-menu-list">
-          <li><a href="../../index.html">Home</a></li>
-          <li><a href="acties.php">Acties</a></li>
-          <li><a href="pizza.php">Pizza</a></li>
-          <li><a href="focaccia.php">Focaccia</a></li>
-          <li><a href="dranken.php">Dranken</a></li>
-          <li><a href="privacyverklaring.php">Privacyverklaring</a></li>
-        </ul>
-      </div>
-    </nav>
+    <!-- Main content -->
+    <main id="main-cart">
+        <section class="flex-container pagina-titel">
+            <h1>Order</h1>
+        </section>
 
-    <div class="header-title hidden">
-      <h2 class="bg-primary-colour-scheme">
-        <a href="../../index.html" class="bg-primary-colour-scheme">Pizzeria Sole Machina</a>
-      </h2>
-    </div>
+        <div class="flex-container flex-container-cart">
 
-    <nav class="header-navbar hidden">
-      <ul class="header-navbar-list bg-primary-colour-scheme">
-        <li><a href="acties.php">Acties</a></li>
-        <li><a href="pizza.php">Pizza</a></li>
-        <li><a href="focaccia.php">Focaccia</a></li>
-        <li><a href="dranken.php">Dranken</a></li>
-      </ul>
-    </nav>
+            <!-- Order Section -->
+            <section id="section-cart-order" aria-label="Winkelwagen items">
+                <?php if (empty($cartItems)): ?>
+                    <div class="empty-cart-message" role="alert" aria-live="polite">
+                        <p>Je winkelwagen is leeg.</p>
+                    </div>
+                <?php else: ?>
+                    <?php foreach ($cartItems as $item): ?>
+                        <?php
+                        // Zorg dat category slug altijd klein is en fallback naar 'pizza'
+                        $categorySlug = isset($item['type_id']) ? strtolower($item['type_id']) : 'pizza';
+                        ?>
+                        <article class="cart-item" aria-label="<?= htmlspecialchars($item['name'] ?? 'Product') ?>">
+                            <div class="cart-item-image bg-white">
+                                <img src="<?= htmlspecialchars(getImagePath($item['name'] ?? '', $categorySlug)) ?>" alt="<?= htmlspecialchars($item['name'] ?? 'Product') ?>" height="150" loading="lazy" />
+                            </div>
 
-    <div class="header-flex-container bg-primary-colour-scheme">
-      <div class="header-buttons bg-primary-colour-scheme">
-        <button class="btn-secondary" onclick="location.href='login.html'">Inloggen</button>
-      </div>
+                            <div class="cart-item-information bg-white">
+                                <h3><?= htmlspecialchars($item['name'] ?? '') ?></h3>
+                                <p><?= htmlspecialchars($item['description'] ?? '') ?></p>
+                                <p class="horizontal-flex-start-self">
+                                    € <?= number_format(floatval($item['price'] ?? 0), 2, ',', '') ?>
+                                </p>
 
-      <div class="header-cart bg-primary-colour-scheme">
-        <a href="cart.html" class="bg-primary-colour-scheme"><i
-            class="fa-solid fa-cart-shopping bg-primary-colour-scheme"></i></a>
-      </div>
-    </div>
-  </header>
+                                <form method="POST" action="<?= BASE_URL ?>/actions/update-cart.php" class="hoeveelheid-selector bg-white" aria-label="Hoeveelheid aanpassen voor <?= htmlspecialchars($item['name']) ?>">
+                                    <input type="hidden" name="product_name" value="<?= htmlspecialchars($item['name']) ?>">
 
-  <!-- Main content -->
-  <main id="main-cart">
-    <section class="flex-container pagina-titel">
-      <h1>Order</h1>
-    </section>
+                                    <button class="cart-button-quantity" type="submit" name="action" value="decrease" aria-label="Verminder hoeveelheid van <?= htmlspecialchars($item['name']) ?>">
+                                        <i class="fas fa-minus bg-white" aria-hidden="true"></i>
+                                    </button>
 
-    <div class="flex-container flex-container-cart">
-      <!-- Order -->
-      <section id="section-cart-order">
-        <div class="cart-item">
-          <div class="cart-item-image bg-white">
-            <img src="../../assets/images/pizza/margherita-speciaal.jpg" alt="Margherita pizza punt" height="150">
-          </div>
+                                    <span class="hoeveelheid bg-white" aria-live="polite"><?= htmlspecialchars($item['quantity'] ?? 0) ?></span>
 
-          <div class="cart-item-information bg-white">
-            <h3>Margherita</h3>
-            <p>Klassieke pizza met tomatensaus, mozzarella en peterselie.</p>
-            <p class="horizontal-flex-start-self">€ 8,99</p>
+                                    <button class="cart-button-quantity" type="submit" name="action" value="increase" aria-label="Verhoog hoeveelheid van <?= htmlspecialchars($item['name']) ?>">
+                                        <i class="fas fa-plus bg-white" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </article>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </section>
 
-            <div class="amount-selector bg-white">
-              <button id="decrease"><i class="fas fa-minus bg-white"></i></button>
-              <span id="amount" class="amount bg-white">1</span>
-              <button id="increase"><i class="fas fa-plus bg-white"></i></button>
-            </div>
-          </div>
+            <!-- Checkout Section -->
+            <aside id="section-cart-checkout" aria-label="Winkelwagen checkout">
+                <div class="flex-container bg-white cart-totaal" role="region" aria-live="polite" aria-atomic="true">
+                    <p class="horizontal-flex-start-self">Totaal</p>
+                    <p class="horizontal-flex-start-self">€ <?= number_format($totalPrice, 2, ',', '') ?></p>
+                </div>
+
+                <?php if (!empty($cartItems)): ?>
+                    <button class="btn-secondary btn-checkout" onclick="location.href='<?= BASE_URL ?>/checkout.php'">Checkout</button>
+                <?php else: ?>
+                    <button class="btn-secondary btn-checkout" disabled>Checkout</button>
+                <?php endif; ?>
+            </aside>
         </div>
+    </main>
 
-        <div class="cart-item">
-          <div class="cart-item-image bg-white">
-            <img src="../../assets/images/pizza/pepperoni.jpg" alt="Margherita pizza punt" height="150">
-          </div>
+    <!-- Footer -->
+    <?php require_once TEMPLATES_DIR . '/elements/footer.php'; ?>
 
-          <div class="cart-item-information bg-white">
-            <h3>Pepperoni</h3>
-            <p>Pizza met tomatensaus, mozzarella en pepperoni.</p>
-            <p class="horizontal-flex-start-self">€ 10,99</p>
-
-            <div class="hoeveelheid-selector bg-white">
-              <button id="min"><i class="fas fa-minus bg-white"></i></button>
-              <span id="hoeveelheid" class="hoeveelheid bg-white">1</span>
-              <button id="plus"><i class="fas fa-plus bg-white"></i></button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Checkout -->
-      <div id="section-cart-checkout">
-        <div class="flex-container bg-white cart-totaal">
-          <p class="horizontal-flex-start-self">Totaal</p>
-          <p class="horizontal-flex-start-self">€ 19,98</p>
-        </div>
-        <button class="btn-secondary btn-checkout" onclick="location.href='checkout.html'">Checkout</button>
-      </div>
-    </div>
-  </main>
-
-  <!-- Footer -->
-  <footer class="bg-primary-colour-scheme">
-    <div class="footer-navbar bg-primary-colour-scheme hidden">
-      <a class="text-primary-colour bg-primary-colour-scheme" href="privacyverklaring.php">Privacyverklaring</a>
-    </div>
-
-    <div class="footer-copyright">
-      <p class="text-primary-colour bg-primary-colour-scheme">© 2024 <a href="../../index.html"
-          class="bg-primary-colour-scheme">Pizzeria Sole Machina</a>. Alle rechten voorbehouden.</p>
-    </div>
-  </footer>
 </body>
 
 </html>
