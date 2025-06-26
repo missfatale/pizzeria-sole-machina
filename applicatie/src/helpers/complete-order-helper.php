@@ -1,7 +1,7 @@
 <?php
 
 /**
- * placeOrder
+ * complete-order-helper.php
  *
  * Creates a new order and its products in the database transactionally.
  *

@@ -34,6 +34,9 @@ function handleCompleteOrder(): void {
         $clientUsername = $user['username'];
         $clientName = trim(($user['firstname'] ?? '') . ' ' . ($user['lastname'] ?? ''));
         $address = trim($_POST['address'] ?? '');
+        if ($address === '') {
+            $address = $user['address'] ?? '';
+        }
 
         try {
             $orderId = placeOrder($clientUsername, $clientName, $cartItems, $address);
@@ -55,7 +58,7 @@ function clearCart(): void {
 /**
  * Renders the checkout form page with an optional error message.
  */
-function renderCheckoutPage(?string $error = null): void {
+function renderCheckoutPage(?string $error = null, string $address = ''): void {
     ?>
     <!DOCTYPE html>
     <html lang="<?= htmlspecialchars(WEBSITE_LANGUAGE) ?>">
@@ -76,9 +79,9 @@ function renderCheckoutPage(?string $error = null): void {
             <div class="error-message"><?= $error ?></div>
         <?php endif; ?>
 
-        <form method="POST" action="<?= BASE_URL . '/complete-order.php' ?>" class="checkout-form">
+        <form method="POST" action="<?= BASE_URL . '/complete-order-action.php' ?>" class="checkout-form">
             <label for="address">Afleveradres</label>
-            <textarea name="address" id="address" required></textarea>
+            <textarea name="address" id="address" required><?= htmlspecialchars($address) ?></textarea>
 
             <button type="submit" class="btn-primary">Bestelling plaatsen</button>
         </form>
@@ -90,3 +93,4 @@ function renderCheckoutPage(?string $error = null): void {
     </html>
     <?php
 }
+

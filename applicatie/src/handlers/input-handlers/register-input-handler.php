@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     // Inloggen na succesvolle registratie
-    authenticateUser($user["username"], $user["role"], $user["first_name"]);
+    authenticateUser($user["username"], $user["role"], $user["first_name"], $user["address"] ?? '');
     $_SESSION["is_logged_in"] = true;
     header('Location: ' . INDEX_PAGE);
     exit();

@@ -52,7 +52,7 @@ $totalPrice = getCartTotal();
                                     € <?= number_format(floatval($item['price'] ?? 0), 2, ',', '') ?>
                                 </p>
 
-                                <form method="POST" action="<?= BASE_URL . '/actions/update-cart.php'?>" class="hoeveelheid-selector bg-white" aria-label="Hoeveelheid aanpassen voor <?= htmlspecialchars($item['name']) ?>">
+                                <form method="POST" action="<?= BASE_URL . '/actions/update-cart-action.php'?>" class="hoeveelheid-selector bg-white" aria-label="Hoeveelheid aanpassen voor <?= htmlspecialchars($item['name']) ?>">
                                     <input type="hidden" name="product_name" value="<?= htmlspecialchars($item['name']) ?>">
 
                                     <button class="cart-button-quantity" type="submit" name="action" value="decrease" aria-label="Verminder hoeveelheid van <?= htmlspecialchars($item['name']) ?>">

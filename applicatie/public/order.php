@@ -21,6 +21,9 @@ if ($userName) {
     $completedOrders = $orders['completed'];
 }
 
+// Refresh User Data from Session
+$user = currentUser();
+
 ?>
 
 <!DOCTYPE html>

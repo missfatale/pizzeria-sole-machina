@@ -75,7 +75,7 @@ $totalPrice = getCartTotal();
                     <?php if (userIsLoggedIn()): ?>
                         <div class="cart-item checkout-actions">
                             <p>Totaal: € <?= number_format($totalPrice, 2, ',', '') ?></p>
-                            <form method="POST" action="<?= BASE_URL . '/actions/complete-order.php'?>" style="margin:0;">
+                            <form method="POST" action="<?= BASE_URL . '/actions/complete-order-action.php'?>" style="margin:0;">
                                 <button type="submit" class="btn-checkout">Checkout</button>
                             </form>
                         </div>

@@ -31,7 +31,7 @@ function renderItemsByCategory(PDO $db, string $category, string $title): void {
                     <p class="horizontal-flex-start-self">
                         € <?= number_format(floatval($item['price'] ?? 0), 2, ',', '') ?>
                     </p>
-                    <form method="POST" action="<?= BASE_URL . '/actions/add-to-cart.php' ?>">
+                    <form method="POST" action="<?= BASE_URL . '/actions/add-to-cart-action.php' ?>">
                         <input type="hidden" name="product" value="<?= htmlspecialchars($item['name'] ?? '') ?>">
                         <input type="hidden" name="price" value="<?= floatval($item['price'] ?? '') ?>">
                         <input type="hidden" name="quantity" value="1">

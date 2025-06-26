@@ -44,4 +44,4 @@ const ADMIN_DASHBOARD_PAGE = BASE_URL . '/admin/dashboard.php';
 const ORDER_CONFIRMATION_PAGE = BASE_URL . '/order-success.php';
 
 // Make the current user globally available as $user
-$user = currentUser();
+$user = getLoggedInUser();
