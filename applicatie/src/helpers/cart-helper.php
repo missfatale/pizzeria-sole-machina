@@ -15,8 +15,10 @@
 
 require_once __DIR__ . '/../bootstrap.php';
 
-function addToCart(string $productName, float $price, int $quantity = 1, string $description = ''): void {
-    if (!isset($_SESSION['cart'])) $_SESSION['cart'] = [];
+function addToCart(string $productName, float $price, int $quantity = 1, string $description = '', string $type_id = 'pizza'): void {
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
+    }
 
     if (isset($_SESSION['cart'][$productName])) {
         $_SESSION['cart'][$productName]['quantity'] += $quantity;
@@ -26,6 +28,7 @@ function addToCart(string $productName, float $price, int $quantity = 1, string 
             'price' => $price,
             'quantity' => $quantity,
             'description' => $description,
+            'type_id' => $type_id,
         ];
     }
 }
