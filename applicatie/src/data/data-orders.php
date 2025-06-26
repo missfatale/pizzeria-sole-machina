@@ -81,3 +81,28 @@ function getOrderDetails(PDO $db, int $orderId): array {
 
     return $query->fetchAll(PDO::FETCH_ASSOC);
 }
+
+/**
+ * Retrieves all orders regardless of user, ordered by datetime descending.
+ * Excluding Completed/Canceled (3,4)
+ *
+ */
+function getAllOrders(PDO $db): array {
+    $sql = "
+        SELECT
+            o.order_id,
+            o.client_username,
+            o.datetime,
+            o.status,
+            o.address
+        FROM Pizza_Order o
+        WHERE o.status IN (0, 1, 2)  -- Exclude Completed/Canceled (3,4)
+        ORDER BY o.datetime DESC
+    ";
+    $query = $db->prepare($sql);
+    $query->execute();
+
+    return $query->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
