@@ -1,35 +1,64 @@
 /*--------------------------------------------------------------
-# Checkout CSS 
+# Cart CSS
 --------------------------------------------------------------*/
 
-/* -------------------- Order -------------------- */
-.cart-item {
-    display: flex;
-    padding: 0;
-}
+/* -------------------- Cart -------------------- */
 
-.cart-item-image,
-.cart-item-information {
-    padding: 1rem 2rem 1rem 2rem;
-}
 
-.order-historie,
-.order-recent {
-    margin-bottom: 2rem;
-}
-
-.order-status h1 {
+#main-order {
+    max-width: 900px;
+    min-width: 40%;
+    margin: 2rem auto;
+    padding: 1.5rem 2rem;
     background-color: var(--clr-primary-white);
-    padding-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    border-radius: 10px;
 }
 
-.order-historie h2 {
-    background-color: var(--clr-secondary-white);
+.pagina-titel {
+    margin-bottom: 1rem;
+    font-weight: 700;
+    font-size: 1.6rem;
 }
 
-@media (max-width: 768px) {
+.order-status {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.cart-item {
+    border-radius: 10px;
+    display: block;
+}
+
+.order-items ul {
+    padding-left: 2rem;
+    list-style-type: none;
+}
+
+.order-items li {
+    margin-bottom: 0.4rem;
+}
+
+@media (max-width: 700px) {
+    .flex-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .order-status {
+        min-width: auto;
+        width: 100%;
+        text-align: left;
+    }
+
     .cart-item {
-        display: flex;
-        padding: 0 2rem 0 2rem;
+        flex-direction: column;
+    }
+
+    .cart-header-details,
+    .order-items {
+        min-width: 100%;
     }
 }
