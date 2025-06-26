@@ -7,17 +7,18 @@
  * and user information retrieval. Used throughout the application for access control.
  *
  * Functions:
- * - authenticateUser()     Stores user session data on login.
- * - isLoggedIn()           Checks if a user is currently authenticated.
- * - getLoggedInUser()      Retrieves user details from the session.
- * - logout()               Destroys session and logs out the user.
+ * - authenticateUser() Stores user session data on login.
+ * - isLoggedIn() Checks if a user is currently authenticated.
+ * - getLoggedInUser() Retrieves user details from the session.
+ * - logout() Destroys session and logs out the user.
  */
 
-function authenticateUser(string $username, string $role, string $firstname): void {
+function authenticateUser(string $username, string $role, string $firstname, string $address = ''): void {
     $_SESSION['hasLoggedIn'] = true;
     $_SESSION['username'] = $username;
     $_SESSION['role'] = $role;
     $_SESSION['firstname'] = $firstname;
+    $_SESSION['address'] = $address;
     $_SESSION['login_time'] = time();
 }
 
@@ -32,6 +33,7 @@ function getLoggedInUser(): ?array {
         'username'  => $_SESSION['username'] ?? null,
         'role'      => $_SESSION['role'] ?? null,
         'firstname' => $_SESSION['firstname'] ?? null,
+        'address'   => $_SESSION['address'] ?? null,
     ];
 }
 
