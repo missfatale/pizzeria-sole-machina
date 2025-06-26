@@ -1,7 +1,7 @@
 <?php
 
 // Bootstrap: Loads all Core Configurations and Path Handlers for the Project.
-require_once __DIR__ . '/../src/boostrap.php';
+require_once __DIR__ . '/../src/bootstrap.php';
 
 // Helper Functionality
 require_once BASE_DIR . '/src/helpers/routing-helper.php';
