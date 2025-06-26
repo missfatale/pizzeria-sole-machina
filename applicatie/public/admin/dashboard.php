@@ -3,7 +3,7 @@
 // Bootstrap: Loads all Core Configurations and Path Handlers for the Project.
 require_once __DIR__ . '/../../src/bootstrap.php';
 
-// Redirect User IF Not Logged In
+// Redirect User IF Not An Admin
 if (!isAdmin()) {
     header('Location: ' . INDEX_PAGE);
     exit();
