@@ -12,6 +12,7 @@ function placeOrder(string $clientUsername, string $clientName, array $cartItems
 {
     $db = maakVerbinding();
 
+    // DEFAULT PERSONNEL USERNAME (In Production Change Me)
     $personnelUsername = 'admin';
     $status = 0; // Pending
 
