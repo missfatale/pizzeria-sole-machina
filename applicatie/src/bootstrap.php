@@ -18,7 +18,7 @@ require_once BASE_DIR . '/src/auth.php';
 
 // Load View Rendering (like view-functions, view-orders, etc.)
 require_once BASE_DIR . '/src/view/view-functions.php';
-require_once BASE_DIR . '/src/view/view-orders.php'; // Order-specific rendering
+require_once BASE_DIR . '/src/view/view-orders.php';
 
 // Load Helper Functions
 require_once BASE_DIR . '/src/helpers/auth-helper.php';

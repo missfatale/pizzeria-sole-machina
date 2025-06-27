@@ -5,9 +5,20 @@ require_once __DIR__ . '/../../bootstrap.php';
 
 require_once BASE_DIR . '/src/data/data-users.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = trim($_POST["login-username"]);
-    $password = $_POST["login-password"];
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // CSRF Token Validation
+    if (
+        empty($_POST['csrf_token']) ||
+        empty($_SESSION['csrf_token']) ||
+        !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])
+    ) {
+        http_response_code(403);
+        exit('Ongeldige CSRF-token.');
+    }
+    unset($_SESSION['csrf_token']); // Invalidate token after use
+
+    $username = trim($_POST["login-username"] ?? '');
+    $password = $_POST["login-password"] ?? '';
 
     // Username or Password Empty
     if (empty($username) || empty($password)) {
@@ -26,14 +37,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Logged In
-    else {
-        authenticateUser($user["username"], $user["role"], $user["first_name"], $user["address"]);
-        $_SESSION["is_logged_in"] = true;
+    authenticateUser($user["username"], $user["role"], $user["first_name"], $user["address"]);
+    $_SESSION["is_logged_in"] = true;
 
-        header('Location: ' . INDEX_PAGE);
-        exit();
-    }
+    header('Location: ' . INDEX_PAGE);
+    exit();
 }
 
+// If not POST, redirect to homepage
 header('Location: ' . INDEX_PAGE);
 exit();

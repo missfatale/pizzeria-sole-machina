@@ -1,15 +1,15 @@
 <?php
 
 /**
- * complete-order-helper.php
+ * data-complete-order.php
  *
  * Creates a new order and its products in the database transactionally.
- *
  */
 
 require_once __DIR__ . '/../database/connect.php';
 
-function placeOrder(string $clientUsername, string $clientName, array $cartItems, string $address = ''): int {
+function placeOrder(string $clientUsername, string $clientName, array $cartItems, string $address = ''): int
+{
     $db = maakVerbinding();
 
     $personnelUsername = 'admin';
@@ -18,36 +18,35 @@ function placeOrder(string $clientUsername, string $clientName, array $cartItems
     try {
         $db->beginTransaction();
 
-        $stmt = $db->prepare('
+        $query = $db->prepare('
             INSERT INTO Pizza_Order (client_username, client_name, personnel_username, datetime, status, address)
             VALUES (:client_username, :client_name, :personnel_username, GETDATE(), :status, :address)
         ');
 
-        $stmt->bindParam(':client_username', $clientUsername);
-        $stmt->bindParam(':client_name', $clientName);
-        $stmt->bindParam(':personnel_username', $personnelUsername);
-        $stmt->bindParam(':status', $status, PDO::PARAM_INT);
-        $stmt->bindParam(':address', $address);
+        $query->bindParam(':client_username', $clientUsername);
+        $query->bindParam(':client_name', $clientName);
+        $query->bindParam(':personnel_username', $personnelUsername);
+        $query->bindParam(':status', $status, PDO::PARAM_INT);
+        $query->bindParam(':address', $address);
 
-        $stmt->execute();
+        $query->execute();
 
-        $orderId = $db->lastInsertId();
+        $orderId = (int) $db->lastInsertId(); // Cast to int for Type Safety
 
-        $stmtItem = $db->prepare('
+        $queryItem = $db->prepare('
             INSERT INTO Pizza_Order_Product (order_id, product_name, quantity)
             VALUES (:order_id, :product_name, :quantity)
         ');
 
         foreach ($cartItems as $item) {
-            $stmtItem->execute([
-                ':order_id' => $orderId,
+            $queryItem->execute([
+                ':order_id'     => $orderId,
                 ':product_name' => $item['name'],
-                ':quantity' => $item['quantity'],
+                ':quantity'     => $item['quantity'],
             ]);
         }
 
         $db->commit();
-
         return $orderId;
     } catch (Exception $e) {
         $db->rollBack();

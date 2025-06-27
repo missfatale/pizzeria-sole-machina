@@ -4,18 +4,18 @@
  * update-order-status-handler.php
  *
  * Handles POST requests to update an order's status.
- * Validates user permissions and input, updates DB, then redirects.
+ * Validates user permissions, input, CSRF token, updates DB, then redirects.
  *
  * Access:
  * - Only logged-in admins allowed.
- *
  */
 
 require_once __DIR__ . '/../bootstrap.php';
 require_once SRC_DIR . '/helpers/auth-helper.php';
-require_once SRC_DIR . '/database/connect.php';
+require_once SRC_DIR . '/data/data-orders.php';
 
-function handleUpdateOrderStatus(): void {
+function handleUpdateOrderStatus(): void
+{
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         http_response_code(405);
         exit('Method Not Allowed');
@@ -25,6 +25,17 @@ function handleUpdateOrderStatus(): void {
         http_response_code(403);
         exit('Forbidden: You do not have permission to perform this action.');
     }
+
+    // CSRF Token Validation
+    if (
+        empty($_POST['csrf_token']) ||
+        empty($_SESSION['csrf_token']) ||
+        !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])
+    ) {
+        http_response_code(403);
+        exit('Ongeldige CSRF-token.');
+    }
+    unset($_SESSION['csrf_token']);
 
     $orderId = $_POST['order_id'] ?? null;
     $status = $_POST['status'] ?? null;
@@ -43,13 +54,11 @@ function handleUpdateOrderStatus(): void {
     try {
         $db = maakVerbinding();
 
-        $sql = "UPDATE Pizza_Order SET status = :status WHERE order_id = :order_id";
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam(':status', $status, PDO::PARAM_INT);
-        $stmt->bindParam(':order_id', $orderId, PDO::PARAM_INT);
-        $stmt->execute();
-
-        $_SESSION['admin_success'] = "Order #$orderId status succesvol bijgewerkt.";
+        if (updateOrderStatus($db, $orderId, $status)) {
+            $_SESSION['admin_success'] = "Order #$orderId status succesvol bijgewerkt.";
+        } else {
+            $_SESSION['admin_error'] = "Fout bij het updaten van de orderstatus.";
+        }
     } catch (PDOException $e) {
         $_SESSION['admin_error'] = "Fout bij het updaten van de orderstatus.";
     }

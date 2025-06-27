@@ -8,7 +8,7 @@
  *
  */
 
-require_once SRC_DIR . '/helpers/render-categories.php';
+require_once SRC_DIR . '/view/view-categories.php';
 
 $db = maakVerbinding();
 

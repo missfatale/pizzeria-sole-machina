@@ -7,11 +7,12 @@ require_once __DIR__ . '/../src/bootstrap.php';
 require_once BASE_DIR . '/src/routing.php';
 
 // Load Allowlist: Load allowed categories and their subcategories.
+$allowedPages = require BASE_DIR . '/src/config/whitelist/page-whitelist.php';
 $allowedCategories = require BASE_DIR . '/src/config/whitelist/category-whitelist.php';
 
 // Determine Which Category to Show based on 'category' GET parameter
 // Falls back to 404 page if the category is invalid or missing.
-$content = resolveCategoryContentFile($_GET['category'] ?? '', $allowedCategories, BASE_DIR . '/public/404.php');
+$content = resolveContentToServe($allowedPages, $allowedCategories, BASE_DIR . '/public/404.php');
 
 ?>
 

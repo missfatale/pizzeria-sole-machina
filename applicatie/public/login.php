@@ -3,9 +3,6 @@
 // Bootstrap: Loads all Core Configurations and Path Handlers for the Project.
 require_once __DIR__ . '/../src/bootstrap.php';
 
-// Sets Page Title
-$pageTitle = "Login";
-
 ?>
 
 <!DOCTYPE html>

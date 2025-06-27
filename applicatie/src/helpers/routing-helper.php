@@ -8,7 +8,7 @@
  */
 
 // Resolves a Whitelisted Page Name to a File Path in /templates/pages
-function resolvePageContentFile($page, $whitelist, $defaultFile) {
+function resolvePageContentFile(string $page, array $whitelist, string $defaultFile): string {
     if (in_array($page, $whitelist)) {
         return BASE_DIR . "/templates/pages/{$page}.php";
     }
@@ -17,7 +17,7 @@ function resolvePageContentFile($page, $whitelist, $defaultFile) {
 }
 
 // Resolves a Whitelisted Category Name to a File Path in /templates/categories
-function resolveCategoryContentFile($category, $whitelist, $defaultFile) {
+function resolveCategoryContentFile(string $category, array $whitelist, string $defaultFile): string {
     foreach ($whitelist as $folder => $allowed) {
         if (in_array($category, $allowed)) {
             return BASE_DIR . "/templates/categories/{$category}.php";
@@ -26,14 +26,3 @@ function resolveCategoryContentFile($category, $whitelist, $defaultFile) {
     http_response_code(404);
     return $defaultFile;
 }
-
-// Resolves a Whitelisted Item Name to a File Path in /templates/items
-/* CONSIDERATION
-function resolveItemContentFile($item, $whitelist, $defaultFile) {
-    if (in_array($item, $whitelist)) {
-        return BASE_DIR . "/templates/items/{$item}.php";
-    }
-    http_response_code(404);
-    return $defaultFile;
-}
-*/

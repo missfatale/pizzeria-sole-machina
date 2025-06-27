@@ -85,7 +85,6 @@ function getOrderDetails(PDO $db, int $orderId): array {
 /**
  * Retrieves all orders regardless of user, ordered by datetime descending.
  * Excluding Completed/Canceled (3,4)
- *
  */
 function getAllOrders(PDO $db): array {
     $sql = "
@@ -105,4 +104,14 @@ function getAllOrders(PDO $db): array {
     return $query->fetchAll(PDO::FETCH_ASSOC);
 }
 
-
+/**
+ * Updates the status of a specific order.
+ */
+function updateOrderStatus(PDO $db, int $orderId, int $status): bool {
+    $sql = "UPDATE Pizza_Order SET status = :status WHERE order_id = :order_id";
+    $query = $db->prepare($sql);
+    return $query->execute([
+        ':status' => $status,
+        ':order_id' => $orderId,
+    ]);
+}

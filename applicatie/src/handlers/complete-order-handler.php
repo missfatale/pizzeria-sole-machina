@@ -13,9 +13,11 @@
 require_once __DIR__ . '/../bootstrap.php';
 require_once SRC_DIR . '/helpers/auth-helper.php';
 require_once SRC_DIR . '/helpers/cart-helper.php';
-require_once SRC_DIR . '/helpers/complete-order-helper.php';
+require_once SRC_DIR . '/data/data-complete-order.php';
+require_once SRC_DIR . '/view/view-checkout.php';
 
-function handleCompleteOrder(): void {
+function handleCompleteOrder(): void
+{
     $user = currentUser();
     if (!$user) {
         header('Location: ' . LOGIN_PAGE);
@@ -29,8 +31,21 @@ function handleCompleteOrder(): void {
     }
 
     $error = null;
+    $address = '';
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // CSRF Token Validation
+        if (
+            empty($_POST['csrf_token']) ||
+            empty($_SESSION['csrf_token']) ||
+            !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])
+        ) {
+            http_response_code(403);
+            exit('Ongeldige CSRF-token.');
+        }
+        // Optionally invalidate token after use
+        unset($_SESSION['csrf_token']);
+
         $clientUsername = $user['username'];
         $clientName = trim(($user['firstname'] ?? '') . ' ' . ($user['lastname'] ?? ''));
         $address = trim($_POST['address'] ?? '');
@@ -48,49 +63,19 @@ function handleCompleteOrder(): void {
         }
     }
 
-    renderCheckoutPage($error);
+    // Generate CSRF token if not present (for initial GET or after errors)
+    if (empty($_SESSION['csrf_token'])) {
+        try {
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        } catch (Exception $e) {
+            $_SESSION['csrf_token'] = bin2hex(openssl_random_pseudo_bytes(32));
+        }
+    }
+
+    renderCheckoutPage($error, $address);
 }
 
-function clearCart(): void {
+function clearCart(): void
+{
     unset($_SESSION['cart']);
 }
-
-/**
- * Renders the checkout form page with an optional error message.
- */
-function renderCheckoutPage(?string $error = null, string $address = ''): void {
-    ?>
-    <!DOCTYPE html>
-    <html lang="<?= htmlspecialchars(WEBSITE_LANGUAGE) ?>">
-    <head>
-        <?php renderDefaultHeadSection(); ?>
-        <link rel="stylesheet" href="<?= BASE_URL . '/assets/css/checkout.css'; ?>">
-    </head>
-    <body>
-
-    <?php require_once TEMPLATES_DIR . '/elements/header.php'; ?>
-
-    <main id="main-checkout">
-        <section class="flex-container pagina-titel">
-            <h1>Bestelling afronden</h1>
-        </section>
-
-        <?php if ($error): ?>
-            <div class="error-message"><?= $error ?></div>
-        <?php endif; ?>
-
-        <form method="POST" action="<?= BASE_URL . '/complete-order-action.php' ?>" class="checkout-form">
-            <label for="address">Afleveradres</label>
-            <textarea name="address" id="address" required><?= htmlspecialchars($address) ?></textarea>
-
-            <button type="submit" class="btn-primary">Bestelling plaatsen</button>
-        </form>
-    </main>
-
-    <?php require_once TEMPLATES_DIR . '/elements/footer.php'; ?>
-
-    </body>
-    </html>
-    <?php
-}
-

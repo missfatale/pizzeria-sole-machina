@@ -15,6 +15,18 @@ function handleUpdateCart(): void {
         exit('Method Not Allowed');
     }
 
+    // CSRF Token Validation
+    if (
+        empty($_POST['csrf_token']) ||
+        empty($_SESSION['csrf_token']) ||
+        !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])
+    ) {
+        http_response_code(403);
+        exit('Ongeldige CSRF-token.');
+    }
+
+    unset($_SESSION['csrf_token']); // Optional for single-use
+
     $name = $_POST['product_name'] ?? '';
     $action = $_POST['action'] ?? '';
 
@@ -29,3 +41,4 @@ function handleUpdateCart(): void {
     header('Location: ' . CART_PAGE);
     exit();
 }
+

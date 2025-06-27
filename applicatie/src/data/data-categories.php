@@ -4,7 +4,7 @@
 require_once __DIR__ . '/../database/connect.php';
 
 function getItemsByCategory(PDO $db, string $category): array {
-    $query = "
+    $sql = "
         SELECT 
             p.name, 
             p.price, 
@@ -18,9 +18,9 @@ function getItemsByCategory(PDO $db, string $category): array {
         GROUP BY p.name, p.price, pt.name
     ";
 
-    $stmt = $db->prepare($query);
-    $stmt->bindParam(':category', $category);
-    $stmt->execute();
+    $query = $db->prepare($sql);
+    $query->bindParam(':category', $category);
+    $query->execute();
 
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $query->fetchAll(PDO::FETCH_ASSOC);
 }

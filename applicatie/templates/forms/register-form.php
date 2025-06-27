@@ -23,4 +23,6 @@
     <input type="text" id="register-address" name="register-address" minlength="5" required>
 </div>
 
+<input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? '') ?>">
+
 <button type="submit" class="btn-secondary">Registreren</button>

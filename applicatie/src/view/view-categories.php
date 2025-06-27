@@ -1,7 +1,7 @@
 <?php
 
 /**
- * render-categories.php
+ * view-categories.php
  *
  * Contains functions to render items grouped by categories.
  * Uses data fetching from data-categories.php and image helper utilities.
@@ -15,7 +15,18 @@ require_once SRC_DIR . '/helpers/image-helper.php';
 
 function renderItemsByCategory(PDO $db, string $category, string $title): void {
     $items = getItemsByCategory($db, $category);
+
+    if (empty($_SESSION['csrf_token'])) {
+        try {
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        } catch (Exception $e) {
+            $_SESSION['csrf_token'] = bin2hex(openssl_random_pseudo_bytes(32)); // Fallback: Less Secure Token
+        }
+    }
+
+    $csrfToken = $_SESSION['csrf_token'];
     ?>
+
     <section class="flex-container pagina-titel">
         <h1><?= htmlspecialchars($title) ?></h1>
     </section>
@@ -37,6 +48,7 @@ function renderItemsByCategory(PDO $db, string $category, string $title): void {
                         <input type="hidden" name="quantity" value="1">
                         <input type="hidden" name="description" value="<?= htmlspecialchars($item['ingredients'] ?? '') ?>">
                         <input type="hidden" name="type_id" value="<?= htmlspecialchars($category) ?>">
+                        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrfToken) ?>">
                         <button type="submit" class="btn-primary">Add</button>
                     </form>
                 </div>

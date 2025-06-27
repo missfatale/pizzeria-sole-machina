@@ -8,4 +8,6 @@
     <input type="password" id="login-password" name="login-password" minlength="8" maxlength="15" required>
 </div>
 
+<input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? '') ?>">
+
 <button type="submit" class="btn-secondary">Inloggen</button>
