@@ -20,6 +20,7 @@ function authenticateUser(string $username, string $role, string $firstname, str
     $_SESSION['firstname'] = $firstname;
     $_SESSION['address'] = $address;
     $_SESSION['login_time'] = time();
+    session_regenerate_id(true); // Prevent session Fixation
 }
 
 function isLoggedIn(): bool {

@@ -20,6 +20,7 @@ function userIsLoggedIn(): bool {
     return isLoggedIn();
 }
 
+// Returns true if the logged-in user has role 'Personnel'
 function isAdmin(): bool {
     $user = currentUser();
     return $user && isset($user['role']) && $user['role'] === 'Personnel';

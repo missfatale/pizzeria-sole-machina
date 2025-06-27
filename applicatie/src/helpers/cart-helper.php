@@ -13,8 +13,6 @@
  * - decreaseQuantity(): Decreases the quantity of an item by one.
  */
 
-require_once __DIR__ . '/../bootstrap.php';
-
 function addToCart(string $productName, float $price, int $quantity = 1, string $description = '', string $type_id = 'pizza'): void {
     if (!isset($_SESSION['cart'])) {
         $_SESSION['cart'] = [];

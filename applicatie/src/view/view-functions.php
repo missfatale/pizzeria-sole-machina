@@ -47,7 +47,6 @@ function getPageTitle(): string {
     return $pageNameFormatted ? "$pageNameFormatted | $websiteTitle" : $websiteTitle;
 }
 
-
 function renderDefaultHeadSection(): void {
     ?>
     <meta charset="<?= htmlspecialchars(CHARSET) ?>">

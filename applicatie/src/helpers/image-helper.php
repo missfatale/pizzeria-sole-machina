@@ -12,7 +12,7 @@
  */
 
 function getImagePath(string $productName, string $category): string {
-    $safeName = str_replace(' ', '-', strtolower($productName));
+    $safeName = preg_replace('/[^a-z0-9\-]/', '', str_replace(' ', '-', strtolower($productName)));
     $safeCategory = strtolower($category);
 
     $baseDir = PUBLIC_DIR . '/assets/images/' . $safeCategory;

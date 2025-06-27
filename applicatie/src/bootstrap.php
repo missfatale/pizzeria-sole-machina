@@ -13,11 +13,12 @@ require_once __DIR__ . '/../src/handlers/path-handler.php';
 // Start Session and Manage Session Defaults
 require_once BASE_DIR . '/src/handlers/session-handler.php';
 
-// Load View Rendering Functions (like viewLoginForm, viewRegisterForm, etc.)
-require_once BASE_DIR . '/src/view/view-functions.php';
-
 // Load Authentication Functions (like isLoggedIn, authenticateUser, logout, etc.)
 require_once BASE_DIR . '/src/auth.php';
+
+// Load View Rendering (like view-functions, view-orders, etc.)
+require_once BASE_DIR . '/src/view/view-functions.php';
+require_once BASE_DIR . '/src/view/view-orders.php'; // Order-specific rendering
 
 // Load Helper Functions
 require_once BASE_DIR . '/src/helpers/auth-helper.php';
@@ -39,9 +40,14 @@ const INDEX_PAGE = BASE_URL . '/index.php';
 const ACCOUNT_PAGE = BASE_URL . '/account.php';
 const CART_PAGE = BASE_URL . '/cart.php';
 const ORDER_PAGE = BASE_URL . '/order.php';
-const LOGOUT_PAGE = BASE_URL . '/actions/logout-action.php';
 const ADMIN_DASHBOARD_PAGE = BASE_URL . '/admin/dashboard.php';
 const ORDER_CONFIRMATION_PAGE = BASE_URL . '/order-success.php';
 
-// Make the current user globally available as $user
+/**
+ * Get the currently logged-in user, if any.
+ *
+ * This function checks the session and retrieves the user data from the database.
+ * It returns an associative array with user information or null if not logged in.
+ *
+ */
 $user = getLoggedInUser();
