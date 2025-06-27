@@ -20,7 +20,7 @@ function loginUser($username, $password): ? array {
     return null;
 }
 
-function registerUser($first_name, $last_name, $username, $password, $address, $role = 'Client') {
+function registerUser(string $first_name, string $last_name, string $username, string $password, string $address, string $role = 'Client'): bool|string {
     $db = maakVerbinding();
 
     // Check if User Exists
@@ -28,8 +28,9 @@ function registerUser($first_name, $last_name, $username, $password, $address, $
     $check = $db->prepare($sql);
     $check->bindParam(':username', $username, PDO::PARAM_STR);
     $check->execute();
+
     if ($check->fetchColumn() > 0) {
-        return null;
+        return "Gebruikersnaam bestaat al.";
     }
 
     // Hash Password
@@ -45,18 +46,10 @@ function registerUser($first_name, $last_name, $username, $password, $address, $
     $query->bindParam(':password', $hashedPassword);
     $query->bindParam(':address', $address);
     $query->bindParam(':role', $role);
-    $query->execute();
 
-    // Give New Registered User Back
-    $sql = "SELECT * FROM [User] WHERE username = :username";
-    $select = $db->prepare($sql);
-    $select->bindParam(':username', $username);
-    $select->execute();
-    $user = $select->fetch(PDO::FETCH_ASSOC);
-
-    if ($user) {
-        unset($user['password']);
-        return $user;
+    if (!$query->execute()) {
+        return "Registratie mislukt door een databasefout.";
     }
-    return null;
+
+    return true; // Registration succeeded
 }

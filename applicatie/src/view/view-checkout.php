@@ -2,6 +2,7 @@
 
 function renderCheckoutPage(?string $error = null, string $address = ''): void {
     ?>
+
     <!DOCTYPE html>
     <html lang="<?= htmlspecialchars(WEBSITE_LANGUAGE) ?>">
     <head>
@@ -23,7 +24,7 @@ function renderCheckoutPage(?string $error = null, string $address = ''): void {
         <form method="POST" action="<?= BASE_URL . '/complete-order-action.php' ?>" class="checkout-form">
             <label for="address">Afleveradres</label>
             <textarea name="address" id="address" required><?= htmlspecialchars($address) ?></textarea>
-            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? '') ?>">
+            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? '') ?>" />
             <button type="submit" class="btn-primary">Bestelling plaatsen</button>
         </form>
     </main>

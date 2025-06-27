@@ -14,6 +14,13 @@ $allowedCategories = require BASE_DIR . '/src/config/whitelist/category-whitelis
 // Falls back to 404 page if the category is invalid or missing.
 $content = resolveContentToServe($allowedPages, $allowedCategories, BASE_DIR . '/public/404.php');
 
+// Check if $content is the 404 page
+if ($content === BASE_DIR . '/public/404.php') {
+    header("HTTP/1.0 404 Not Found");
+    header('Location: ' . FOURZEROFOUR_PAGE);
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +36,7 @@ $content = resolveContentToServe($allowedPages, $allowedCategories, BASE_DIR . '
     <?php require_once BASE_DIR . '/templates/elements/header.php'; ?>
 
     <!-- Main Content -->
-    <main>
+    <main class="main-category">
         <?php require $content; ?>
     </main>
 

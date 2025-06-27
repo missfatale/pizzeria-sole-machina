@@ -76,8 +76,10 @@ $totalPrice = getCartTotal();
                         <div class="cart-item checkout-actions">
                             <p>Totaal: € <?= number_format($totalPrice, 2, ',', '') ?></p>
                             <form method="POST" action="<?= BASE_URL . '/actions/complete-order-action.php'?>" style="margin:0;">
+                                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? '') ?>">
                                 <button type="submit" class="btn-checkout">Checkout</button>
                             </form>
+
                         </div>
                     <?php endif; ?>
                 <?php endif; ?>

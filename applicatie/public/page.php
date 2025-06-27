@@ -16,6 +16,12 @@ $allowedCategories = require BASE_DIR . '/src/config/whitelist/category-whitelis
 $page = $_GET['page'] ?? '';
 $content = resolveContentToServe($allowedPages, $allowedCategories, PUBLIC_DIR . '/404.php');
 
+// Check if $content is the 404 page
+if ($content === BASE_DIR . '/public/404.php') {
+    header("HTTP/1.0 404 Not Found");
+    header('Location: ' . FOURZEROFOUR_PAGE);
+    exit();
+}
 
 ?>
 

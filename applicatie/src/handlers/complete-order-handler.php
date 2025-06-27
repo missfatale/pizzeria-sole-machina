@@ -43,8 +43,6 @@ function handleCompleteOrder(): void
             http_response_code(403);
             exit('Ongeldige CSRF-token.');
         }
-        // Optionally invalidate token after use
-        unset($_SESSION['csrf_token']);
 
         $clientUsername = $user['username'];
         $clientName = trim(($user['firstname'] ?? '') . ' ' . ($user['lastname'] ?? ''));
@@ -63,7 +61,7 @@ function handleCompleteOrder(): void
         }
     }
 
-    // Generate CSRF token if not present (for initial GET or after errors)
+    // Ensure CSRF token exists for the form
     if (empty($_SESSION['csrf_token'])) {
         try {
             $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
@@ -74,6 +72,7 @@ function handleCompleteOrder(): void
 
     renderCheckoutPage($error, $address);
 }
+
 
 function clearCart(): void
 {

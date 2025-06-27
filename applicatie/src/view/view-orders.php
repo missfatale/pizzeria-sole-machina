@@ -61,6 +61,7 @@ function renderAdminOrders(array $orders): void
         <form method="POST" action="<?= BASE_URL . '/actions/update-order-status-action.php' ?>"
               class="cart-item cart-header admin-order-form">
             <input type="hidden" name="order_id" value="<?= (int) $order['order_id'] ?>">
+            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? '') ?>">
 
             <div class="order-status-panel">
                 <select name="status" class="order-status-select">

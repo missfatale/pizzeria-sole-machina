@@ -32,9 +32,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $result = registerUser($first_name, $last_name, $username, $password, $address);
 
     if ($result === true) {
-        header('Location: ' . LOGIN_PAGE);
-        exit();
+        // After Successful Registration, Automatically Login the User
+        $user = loginUser($username, $password);
+        if ($user) {
+            authenticateUser($user["username"], $user["role"], $user["first_name"], $user["address"]);
+            $_SESSION["is_logged_in"] = true;
+            header('Location: ' . INDEX_PAGE);
+            exit();
+        } else {
+            // Something went wrong during login after registration
+            $_SESSION["register_error"] = "Registratie gelukt, maar inloggen mislukt. Probeer opnieuw.";
+            header('Location: ' . LOGIN_PAGE);
+            exit();
+        }
     } else {
+        // $result contains error message string
         $_SESSION["register_error"] = $result;
         header('Location: ' . LOGIN_PAGE);
         exit();

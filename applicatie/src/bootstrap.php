@@ -42,6 +42,7 @@ const CART_PAGE = BASE_URL . '/cart.php';
 const ORDER_PAGE = BASE_URL . '/order.php';
 const ADMIN_DASHBOARD_PAGE = BASE_URL . '/admin/dashboard.php';
 const ORDER_CONFIRMATION_PAGE = BASE_URL . '/order-success.php';
+const FOURZEROFOUR_PAGE = BASE_URL . '/404.php';
 
 /**
  * Get the currently logged-in user, if any.

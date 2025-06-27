@@ -35,10 +35,19 @@ require_once __DIR__ . '/../src/bootstrap.php';
 
                         <?php if (isset($_SESSION['register_error'])): ?>
                             <div class="error-message">
-                                <?= htmlspecialchars($_SESSION['register_error']) ?>
+                                <?php
+                                if (is_array($_SESSION['register_error'])) {
+                                    foreach ($_SESSION['register_error'] as $error) {
+                                        echo '<p>' . htmlspecialchars($error) . '</p>';
+                                    }
+                                } else {
+                                    echo htmlspecialchars($_SESSION['register_error']);
+                                }
+                                unset($_SESSION['register_error']);
+                                ?>
                             </div>
-                            <?php unset($_SESSION['register_error']); ?>
                         <?php endif; ?>
+
 
                         <?php viewRegisterForm(); ?>
                     </form>
