@@ -54,6 +54,7 @@ $totalPrice = getCartTotal();
 
                                 <form method="POST" action="<?= BASE_URL . '/actions/update-cart-action.php'?>" class="hoeveelheid-selector bg-white" aria-label="Hoeveelheid aanpassen voor <?= htmlspecialchars($item['name']) ?>">
                                     <input type="hidden" name="product_name" value="<?= htmlspecialchars($item['name']) ?>">
+                                    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? '') ?>">
 
                                     <button class="cart-button-quantity" type="submit" name="action" value="decrease" aria-label="Verminder hoeveelheid van <?= htmlspecialchars($item['name']) ?>">
                                         <i class="fas fa-minus bg-white" aria-hidden="true"></i>

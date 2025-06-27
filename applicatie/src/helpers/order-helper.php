@@ -18,13 +18,21 @@ function getUserOrders(string $username): array {
     $db = maakVerbinding();
 
     $currentOrders = getCurrentOrdersByUser($db, $username);
+    foreach ($currentOrders as &$order) {
+        $order['details'] = getOrderDetails($db, $order['order_id']);
+    }
+
     $completedOrders = getCompletedOrdersByUser($db, $username);
+    foreach ($completedOrders as &$order) {
+        $order['details'] = getOrderDetails($db, $order['order_id']);
+    }
 
     return [
         'current' => $currentOrders,
         'completed' => $completedOrders
     ];
 }
+
 
 function mapOrderStatus(int $status): string {
     return match($status) {

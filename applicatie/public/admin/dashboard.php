@@ -3,7 +3,6 @@
 // Bootstrap: Loads all Core Configurations and Path Handlers for the Project.
 require_once __DIR__ . '/../../src/bootstrap.php';
 
-// Redirect User IF Not An Admin
 if (!isAdmin()) {
     header('Location: ' . INDEX_PAGE);
     exit();
@@ -11,6 +10,11 @@ if (!isAdmin()) {
 
 $db = maakVerbinding();
 $orders = getAllOrders($db);
+
+// Add details to each order
+foreach ($orders as &$order) {
+    $order['details'] = getOrderDetails($db, $order['order_id']);
+}
 
 ?>
 
@@ -44,9 +48,8 @@ $orders = getAllOrders($db);
         </section>
     </main>
 
-    <!-- Footer -->
+    <!-- Footer + Navigation -->
     <?php require_once TEMPLATES_DIR . '/elements/footer.php'; ?>
 
 </body>
-
 </html>
